@@ -1,5 +1,3 @@
-import { Teams } from './../teams';
-import { Team } from './../team';
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
@@ -14,11 +12,45 @@ export class TeamsService {
         'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Googleplex_HQ_%28cropped%29.jpg/1920px-Googleplex_HQ_%28cropped%29.jpg',
       logo:
         'https://dobry-rozmiar.pl/wp-content/uploads/2019/04/Google-Logo.jpg',
-      totalCount: 1234,
-      members: {
-        name: 'Bob',
-        count: 123,
-      },
+      totalCount: 30879,
+      members: [
+        {
+          name: 'Tom',
+          count: 1564,
+        },
+        {
+          name: 'Bob',
+          count: 325,
+        },
+        {
+          name: 'Charles',
+          count: 6858,
+        },
+        {
+          name: 'James',
+          count: 780,
+        },
+        {
+          name: 'Kate',
+          count: 4574,
+        },
+        {
+          name: 'Chris',
+          count: 1251,
+        },
+        {
+          name: 'Eva',
+          count: 3256,
+        },
+        {
+          name: 'Julia',
+          count: 8798,
+        },
+        {
+          name: 'Nick',
+          count: 3473,
+        },
+      ],
     },
     {
       id: 2,
@@ -29,25 +61,108 @@ export class TeamsService {
         'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Building92microsoft.jpg/1920px-Building92microsoft.jpg',
       logo:
         'https://cdn.pixabay.com/photo/2013/02/12/09/07/microsoft-80660_960_720.png',
-      totalCount: 4321,
-      members: {
-        name: 'Tom',
-        count: 321,
-      },
+      totalCount: 30879,
+      members: [
+        {
+          name: 'Tom',
+          count: 1564,
+        },
+        {
+          name: 'Bob',
+          count: 325,
+        },
+        {
+          name: 'Charles',
+          count: 6858,
+        },
+        {
+          name: 'James',
+          count: 780,
+        },
+        {
+          name: 'Kate',
+          count: 4574,
+        },
+        {
+          name: 'Chris',
+          count: 1251,
+        },
+        {
+          name: 'Eva',
+          count: 3256,
+        },
+        {
+          name: 'Julia',
+          count: 8798,
+        },
+        {
+          name: 'Nick',
+          count: 3473,
+        },
+      ],
     },
   ];
 
-  findAll(): Teams {
+  private readonly myTeam = {
+    id: 1,
+    name: 'Google',
+    description:
+      'Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, a search engine, cloud computing, software, and hardware. It is considered one of the five Big Tech companies along with Amazon, Facebook, Apple, and Microsoft.one',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Googleplex_HQ_%28cropped%29.jpg/1920px-Googleplex_HQ_%28cropped%29.jpg',
+    logo: 'https://dobry-rozmiar.pl/wp-content/uploads/2019/04/Google-Logo.jpg',
+    totalCount: 30879,
+    members: [
+      {
+        name: 'Tom',
+        count: 1564,
+      },
+      {
+        name: 'Bob',
+        count: 325,
+      },
+      {
+        name: 'Charles',
+        count: 6858,
+      },
+      {
+        name: 'James',
+        count: 780,
+      },
+      {
+        name: 'Kate',
+        count: 4574,
+      },
+      {
+        name: 'Chris',
+        count: 1251,
+      },
+      {
+        name: 'Eva',
+        count: 3256,
+      },
+      {
+        name: 'Julia',
+        count: 8798,
+      },
+      {
+        name: 'Nick',
+        count: 3473,
+      },
+    ],
+  };
+
+  findAll() {
     return this.teams;
   }
 
-  find(id: number): Team {
+  find(id: number) {
     const team = this.teams.find((t) => t.id === id);
     if (!team) throw new NotFoundException('Team not found');
     return team;
   }
 
-  create(team: Team) {
+  create(team) {
     const data = {
       id: Date.now(),
       name: team.name,
@@ -60,7 +175,7 @@ export class TeamsService {
     this.teams.push(data);
   }
 
-  update(team: Team) {
+  update(team) {
     if (!this.teams[team.id]) throw new Error('Team not found');
     this.teams[team.id] = team;
   }
@@ -69,5 +184,9 @@ export class TeamsService {
     const team = this.teams[id];
     if (!team) throw new Error('Team not found');
     delete this.teams[id];
+  }
+
+  findMyTeam() {
+    return this.myTeam;
   }
 }

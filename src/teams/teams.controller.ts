@@ -1,4 +1,3 @@
-import { Teams } from './../teams';
 import { Team } from './../team';
 import { TeamsService } from './teams.service';
 import {
@@ -7,6 +6,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Put,
 } from '@nestjs/common';
@@ -16,12 +16,12 @@ export class TeamsController {
   constructor(private readonly teamsService: TeamsService) {}
 
   @Get()
-  async index(): Promise<Teams> {
+  index() {
     return this.teamsService.findAll();
   }
 
   @Get(':id')
-  async find(@Param('id') id: number): Promise<Team> {
+  find(@Param('id', ParseIntPipe) id: number) {
     return this.teamsService.find(id);
   }
 
@@ -38,5 +38,14 @@ export class TeamsController {
   @Delete(':id')
   delete(@Param('id') id: number) {
     return this.teamsService.delete(id);
+  }
+}
+@Controller('team')
+export class TeamController {
+  constructor(private readonly teamsService: TeamsService) {}
+
+  @Get()
+  index() {
+    return this.teamsService.findMyTeam();
   }
 }
