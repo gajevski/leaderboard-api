@@ -44,8 +44,22 @@ export class TeamsController {
 export class TeamController {
   constructor(private readonly teamsService: TeamsService) {}
 
+  @Put()
+  create(@Body() counterExcist) {
+    return this.teamsService.createCounter(counterExcist);
+  }
+
   @Get()
   index() {
     return this.teamsService.findMyTeam();
+  }
+}
+@Controller('counter')
+export class CounterController {
+  constructor(private readonly teamsService: TeamsService) {}
+
+  @Put()
+  increase(@Body() totalCount) {
+    return this.teamsService.increaseCounter(totalCount);
   }
 }
